@@ -43,7 +43,7 @@ app.controller('dataJoggeling', function($http, $scope, $sce)
         });
     };
 
-    $scope.hasError = function () {
+    $scope.hasError = function () { 
         return $scope.csvData.isError;
     };
 
