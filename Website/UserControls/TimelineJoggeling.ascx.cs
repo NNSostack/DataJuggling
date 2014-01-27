@@ -100,6 +100,7 @@ public partial class UserControls_TimelineJoggeling : System.Web.UI.UserControl
                     if ( !newQs.ContainsKey(key.ToLower()) )
                     {
                         sbLink.Append(qsSep);
+                        
                         sbLink.AppendFormat("{0}={1}", key, HttpUtility.UrlEncode(val));
                         qsSep = "&";
                     }
@@ -147,7 +148,12 @@ public partial class UserControls_TimelineJoggeling : System.Web.UI.UserControl
                     //if ( DateTime.Now.AddDays(-7) < dt && dt < DateTime.Now.AddMonths(1) )
                     {
                         sb.AppendLine(",");
-                        sb.AppendFormat(deadlineFormat, label, row.Values[iTextColumn].Value.ToString().Replace("\n", "").Replace("'", @"\'"), dt.Year, dt.Month - 1, dt.Day, dtEnd.Year, dtEnd.Month - 1, dtEnd.Day);
+                        String text = row.Values[iTextColumn].Value.ToString().Replace("\n", "").Replace("'", @"\'");
+
+                        //if (text != null && text.Length > 20)
+                        //    text = text.Substring20) + "...";
+
+                        sb.AppendFormat(deadlineFormat, label, text, dt.Year, dt.Month - 1, dt.Day, dtEnd.Year, dtEnd.Month - 1, dtEnd.Day);
                     }
                 }
             }

@@ -18,14 +18,15 @@ app.controller('dataJoggeling', function($http, $scope, $sce)
 
     $scope.incrementStep = function (inc) {
         $scope._step += inc;
-        console.log($scope._step);
         if ($scope._step == 3)
             $scope.changePreview();
     };
 
     $scope.analyzeCsvData = function () {
+        $scope.csvData.isError = false;
         $http.post("/api/Csv/AnalyzeCsvData", $scope.csvData)
             .success(function (data, status, headers, config) {
+                $('.has-spinner').toggleClass('active');
                 $scope.csvData = data;
                 if (!data.isError) {
                     $scope.incrementStep(1);
@@ -33,13 +34,12 @@ app.controller('dataJoggeling', function($http, $scope, $sce)
                 return data;
 
             }).error(function (data, status, headers, config) {
+                $('.has-spinner').toggleClass('active');
                 $scope.csvData = data;
                 if (!data.isError) {
                     $scope.incrementStep(1);
                 }
                 return data;
-                
-                return status;
         });
     };
 
@@ -90,7 +90,6 @@ app.controller('dataJoggeling', function($http, $scope, $sce)
         $http.post("/api/Csv/GetUrl", $scope.csvData)
             .success(function (data, status, headers, config) {
                 var url = $sce.trustAsResourceUrl(data);
-                console.log(url);
                 $scope.iFrameTrustSrc = url;
                 $scope.iFrameFullSrc = '<iframe src="' + $scope.iFrameTrustSrc + '" frameborder="0" style="float: left; width: ' + $scope.csvData.Width + 'px; height: 400px"></iframe>';
             }).error(function (data, status, headers, config) {

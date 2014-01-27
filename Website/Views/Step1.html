@@ -1,22 +1,52 @@
-﻿<div class="col-lg-6">
+﻿<style>
+    .spinner {
+        display: inline-block;
+        opacity: 0;
+        max-width: 0;
+        -webkit-transition: opacity 0.25s, max-width 0.45s;
+        -moz-transition: opacity 0.25s, max-width 0.45s;
+        -o-transition: opacity 0.25s, max-width 0.45s;
+        transition: opacity 0.25s, max-width 0.45s; /* Duration fixed since we animate additional hidden width */
+    }
+
+    .has-spinner.active {
+        cursor: progress;
+    }
+
+    .has-spinner.active .spinner {
+        opacity: 1;
+        max-width: 50px; /* More than it will ever come, notice that this affects on animation duration */
+    }
+
+    .has-spinner i {
+        color: #FFFFFF;
+        margin-left: 0px; 
+    }
+</style>
+
+
+<div class="col-lg-6">
     <h1>Indsæt link til dit dokument her</h1>
     <form class="form-inline" role="form">
         <div class="form-group">
             <input type="url" class="form-control" ng-model="csvData.CsvDocument" placeholder="Indsæt link her">
         </div>
-        <button type="submit" class="btn btn-warning btn-lg"
+        <button type="submit" class="btn btn-warning btn-lg has-spinner"
             data-ng-click="analyzeCsvData()"
             onclick="return false;">
-            Næste ></button>
+             <span class="spinner"><i class="icon-spin icon-refresh"></i></span>
+            Næste >
+
+
+        </button>
         <div style="width: 383px; margin-top: 10px;" class="alert alert-danger" data-ng-show="hasError()">
             Der er desværre sket en fejl<br />
             {{ ErrorMessage() }}
         </div>
         <div style="margin-top: 10px;">
             <button type="submit" style="width: 383px;" onclick="window.location = window.location + '#demo';" class="btn btn-warning btn-lg">
-                <a href="#demo" style="color:#FFFFFF">
-                    Eller klik her for at se en kort gratis demo
-                </a>        
+                <a href="#demo" style="color: #FFFFFF">Eller klik her for at se en kort gratis demo
+                </a>
             </button>
         </div>
     </form>

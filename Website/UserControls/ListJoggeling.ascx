@@ -21,8 +21,7 @@
 
     <asp:Repeater runat="server" ID="listJoggler">
         <ItemTemplate>
-            <div class="table-responsive">
-                <tbody>
+                <tbody class="table-responsive">
                     <tr>
                         <td colspan="<%# ((System.Collections.Generic.List<IColumnName>)columnNames.DataSource).Count %>">
                             <h2><%# Eval("title") %></h2>
@@ -40,7 +39,6 @@
                         </ItemTemplate>
                     </asp:Repeater>
                 </tbody>
-            </div>
         </ItemTemplate>
 
     </asp:Repeater>
