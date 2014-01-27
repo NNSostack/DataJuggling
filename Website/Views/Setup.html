@@ -1,0 +1,27 @@
+﻿<div class="form-group">
+    <label for="width" title="Bredde på chart">Bredde (px)</label>
+    <input id="Text1" class="form-control" type="text" ng-model="csvData.Width" style="width: 200px;" />
+</div>
+
+<div class="checkbox">
+    <label>
+        <input id="hasColumnNames" type="checkbox" ng-model="csvData.HasColumnNames" />
+        Har kolonne overskrifter
+    </label>
+</div>
+<div class="form-group">
+    <label>Visningstype</label>
+
+    <div class="radio">
+        <label>
+            <input type="radio" name="optionsRadios" ng-model="csvData.DisplayType" id="optionsRadios1" value="Timeline" />
+            Tidslinievisning
+        </label>
+    </div>
+    <div class="radio">
+        <label>
+            <input type="radio" name="optionsRadios" ng-model="csvData.DisplayType" id="optionsRadios2" value="List" />
+            Listevisning   
+        </label>
+    </div>
+</div>

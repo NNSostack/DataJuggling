@@ -1,0 +1,55 @@
+﻿<div class="col-lg-6">
+    <h1>Nu skal du vælge, hvordan dine data skal præsenteres</h1>
+    <p>Vælg en af de tilgængelige typer til højre og tryk Næste</p>
+
+    <form class="form-inline" role="form">
+        <button type="submit" class="btn btn-warning btn-lg" data-ng-click="incrementStep(-1)" onclick="return false;">< Tilbage</button>    
+        <button type="submit" class="btn btn-warning btn-lg" data-ng-click="incrementStep(1)" onclick="return false;">Næste ></button>
+    </form>
+</div>
+<style>
+    /*.border {
+            height: 250px;
+        }*/
+
+    img {
+            height: 100px;
+        }
+
+    .btn-default {
+        width: 220px;
+    }
+
+    .col-lg-6 {
+        overflow: hidden;
+    }
+
+    .thumbnailcontainer-true{
+        border: 5px solid #EEA236; 
+        padding: 3px; 
+    }
+
+    .thumbnail {
+        margin-bottom: 0px;
+    }
+</style>
+<div class="row">
+    <div class="col-sm-6 col-md-3 thumbnailcontainer-{{csvData.DisplayType == 'Timeline'}}">
+        <div class="thumbnail" data-ng-click="csvData.DisplayType = 'Timeline'" >
+            <img alt="Tidslinie" src="img/Timeline.png">
+            <!--<div class="alert alert-danger">
+                Visningen er ikke tilgængelig<br />
+                Påkrævet:<br />
+                1 tekstkolonne<br />
+                1 datokolonne
+            </div>-->
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-3 thumbnailcontainer-{{csvData.DisplayType == 'List'}}">
+        <div class="thumbnail" data-ng-click="csvData.DisplayType = 'List'">
+            <img alt="Liste" src="img/List.png">
+        </div>
+    </div>
+
+
+</div>

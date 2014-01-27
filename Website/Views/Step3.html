@@ -1,0 +1,43 @@
+﻿
+
+<div class="col-lg-6">
+    <h1>Din visning er nu klar og vises til højre</h1>
+    <p>Du kan vælge at ændre opsætning ved at trykke næste</p>
+    <p>Eller du kan vælge at kopiere adressen ind i en IFrame</p>
+
+    <form class="form-inline" role="form">
+        <div style="margin-bottom: 10px;">
+            <button type="submit" class="btn btn-warning btn-lg" onclick="copyToClipboard(document.getElementById('linkToClipboard').value)">Kopier link</button>
+            <button type="submit" class="btn btn-warning btn-lg" onclick="copyToClipboard(document.getElementById('iframeLinkToClipboard').value)">Kopier kode til hjemmeside</button>
+            
+        </div>
+
+        <button type="submit" class="btn btn-warning btn-lg" data-ng-click="incrementStep(-1)" onclick="return false;">< Tilbage</button>
+        <button type="submit" class="btn btn-warning btn-lg" data-ng-click="incrementStep(1)" onclick="return false;">Opsætning ></button>
+    </form>
+</div>
+<style>
+    /*.border {
+            height: 250px;
+        }*/
+
+    /*img {
+            border: 1px solid black;
+        }*/
+
+    .btn-default {
+        width: 220px;
+    }
+
+    .col-lg-6 {
+        overflow: hidden;
+    }
+</style>
+<div class="row">
+    <div class="col-sm-6 col-md-3">
+        <iframe ng-src="{{iFrameTrustSrc}}" frameborder="0" style="float: left; width: 600px; height: 400px"></iframe>
+        <input id="linkToClipboard" type="text" value="{{iFrameTrustSrc}}" style="width: 900px; display: none;" />
+        <input id="iframeLinkToClipboard" type="text" value="{{iFrameFullSrc}}" style="width: 900px; display: none;" />
+        
+    </div>
+</div>

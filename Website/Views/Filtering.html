@@ -1,0 +1,25 @@
+﻿<div class="form-group">
+    <label for="filterBy" title="Filtrer på kolonne">Filtrer på følgende kolonne</label>
+    <div class="radio">
+        <label>
+            <input type="radio" name="radioFilterBy" ng-model="csvData.FilterBy" value="" />
+            Ingen filtrering
+        </label>
+    </div>
+    <div class="radio" ng-repeat="col in csvData.Columns">
+        <label>
+            <input type="radio" name="radioFilterBy" ng-model="csvData.FilterBy" value="{{col.Name}}" />
+            {{ col.Name }}
+        </label>
+    </div>
+</div>
+<div class="form-group">
+    <label for="filterValue" title="Filtrerings værdi">Filtrer på</label>
+    <input id="filterValue" class="form-control" type="text" ng-model="csvData.FilterValue" style="width: 200px;" />
+</div>
+
+<div class="form-group">
+    <label for="exactFilterMatch" title="Eksakt match">Eksakt match på filter</label>
+    <input id="excatFilterMatch" class="form-control" type="checkbox" ng-model="csvData.ExactFilterMatch" />
+</div>
+

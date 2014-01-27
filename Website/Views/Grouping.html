@@ -1,0 +1,15 @@
+﻿<div class="form-group">
+    <label for="groupBy" title="Grupper på kolonne">Grupper på følgende kolonne</label>
+    <div class="radio">
+        <label>
+            <input type="radio" name="radioGroupBy" ng-model="csvData.GroupBy" value="" />
+            Ingen gruppering
+        </label>
+    </div>
+    <div class="radio" ng-repeat="col in csvData.Columns">
+        <label>
+            <input type="radio" name="radioGroupBy" ng-model="csvData.GroupBy" value="{{col.Name}}" />
+            {{ col.Name }}
+        </label>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+﻿<div class="col-lg-6">
+
+    <h1>Opsætning</h1>
+    <p>Du kan se visningen af dine data ved trykke færdig</p>
+
+
+    <form class="form-inline" role="form">
+        <button type="submit" class="btn btn-warning btn-lg" data-ng-click="incrementStep(-1)" onclick="return false;">< Tilbage</button>    
+        <button type="submit" class="btn btn-warning btn-lg" data-ng-click="incrementStep(-1)" onclick="return false;">Færdig ></button>
+    </form>
+</div>
+<style>
+    .nav-tabs li a {
+        -moz-border-bottom-colors: none;
+        -moz-border-left-colors: none;
+        -moz-border-right-colors: none;
+        -moz-border-top-colors: none;
+        background-color: #0;
+        border-color: #DDDDDD #DDDDDD rgba(0, 0, 0, 0);
+        border-image: none;
+        border-style: solid;
+        border-width: 1px;
+        color: #555555;
+        cursor: default;
+    }
+
+    .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+        background-color: #F0AD4E;
+        border-color: #F0AD4E #F0AD4E #F0AD4E;
+        color: #FFFFFF;
+    }
+
+    .nav-tabs li a {
+        border-color: #DDDDDD #DDDDDD rgba(0, 0, 0, 0);
+        background-color: #F0AD4E;
+        border-image: none;
+        border-style: solid;
+        border-width: 1px;
+        color: #555555;
+        cursor: default;
+    }
+</style>
+
+<div class="row">
+    <div class="col-sm-6 col-md-6">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab1" data-ng-show="csvData.CsvDocumentValid" data-toggle="tab">Generel</a></li>
+            <li><a href="#tab2" data-ng-show="csvData.CsvDocumentValid" data-toggle="tab">Gruppering</a></li>
+            <li><a href="#tab3" data-ng-show="csvData.CsvDocumentValid" data-toggle="tab">Filtrering</a></li>
+            <li><a href="#tab4" data-ng-show="csvData.DisplayType == 'Timeline'" data-toggle="tab">Tidsline</a></li>
+            <li><a href="#tab5" data-ng-show="csvData.DisplayType == 'List'" data-toggle="tab">Liste</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="tab1">
+                <div data-ng-include src="'Views/Setup.html'"></div>
+            </div>
+            <div class="tab-pane" id="tab2">
+                <div data-ng-include src="'Views/Grouping.html'"></div>
+            </div>
+            <div class="tab-pane" id="tab3">
+                <div data-ng-include src="'Views/Filtering.html'"></div>
+            </div>
+            <div class="tab-pane" id="tab4">
+                <div data-ng-include src="'Views/Timeline.html'"></div>
+            </div>
+            <div class="tab-pane" id="tab5">
+                <div data-ng-include src="'Views/List.html'"></div>
+            </div>
+
+        </div>
+    </div>
+</div>

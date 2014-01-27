@@ -1,0 +1,57 @@
+﻿<fieldset>
+    <legend>Timeline egenskaber</legend>
+
+    <div class="form-group" style="float:left;">
+        <label title="Benyt følgende kolonne som tekst">Tekstkolonne</label>
+        <div class="radio" ng-repeat="col in getStringCols()">
+            <label>
+                <input type="radio" name="radioTextColumn" ng-model="csvData.Timeline.TextColumn" value="{{col.Name}}" />
+                {{ col.Name }}
+            </label>
+        </div>
+    </div>
+
+    <div class="form-group" style="float:left;">
+        <label title="Benyt følgende kolonne som startdato">Startdato</label>
+        <div class="radio" ng-repeat="col in getDateTimes()">
+            <label>
+                <input type="radio" name="radioStartDate" ng-model="csvData.Timeline.startDateColumn" value="{{col.Name}}" />
+                {{ col.Name }}
+            </label>
+        </div>
+    </div>
+
+    <div class="form-group" style="float:left;">
+        <label title="Benyt følgende kolonne som startdato">Slutdato</label>
+        <div class="radio">
+            <label> 
+                <input type="radio" name="radioEndDate" ng-model="csvData.Timeline.endDateColumn" value="" />
+                Ingen
+            </label>
+        </div>
+        <div class="radio" ng-repeat="col in getDateTimes()">
+            <label>
+                <input type="radio" name="radioEndDate" ng-model="csvData.Timeline.endDateColumn" value="{{col.Name}}" />
+                {{ col.Name }}
+            </label>
+        </div>
+    </div>
+    <div style="clear:both;"></div>
+
+    <div class="form-group"">
+        <label title="Skal der Benyttes tidsinterval for tidslinien?">Tidsinterval</label>
+        <div class="form-group">
+            <label for="numberOfDays" title="Antal dage at vise frem i tiden">Angiv antal dage frem i tiden der skal vises (-1 betyder at alt vises)</label>
+            <input id="numberOfDays" class="form-control" type="text" ng-model="csvData.Timeline.NumberOfDaysToShowFromNow" style="width: 200px;" />
+        </div>
+    </div>
+
+    <div class="form-group"">
+        <label title="Vis kun linier med indhold?">Vis kun linier med indhold</label>
+        <div class="form-group">
+            <input class="form-control" type="checkbox" ng-model="csvData.Timeline.OnlyShowLinesWithContent" style="width: 200px;" />
+        </div>
+    </div>
+
+
+</fieldset>     

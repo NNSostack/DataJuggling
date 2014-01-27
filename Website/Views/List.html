@@ -1,0 +1,9 @@
+﻿<div class="form-group">
+    <label for="filterBy" title="Filtrer på kolonne">Inkluder følgende kolonner</label>
+    <div class="radio" ng-repeat="col in csvData.Columns">
+        <label>
+            <input type="checkbox" value="{{col.Name}}" ng-model="col.Include" />
+            {{ col.Name }}
+        </label>
+    </div>
+</div>
