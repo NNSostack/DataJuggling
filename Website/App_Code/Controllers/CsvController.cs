@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -62,6 +63,22 @@ namespace WebAPI.Controllers
             {
                 if (String.IsNullOrEmpty(data.CsvDocument))
                     throw new Exception("Du skal indtaste et link til dokumentet");
+
+                try
+                {
+                    SmtpClient client = new SmtpClient();
+                    MailMessage mm = new MailMessage();
+                    mm.From = new MailAddress("analyze@datajonglering.dk");
+                    mm.To.Add(new MailAddress("nns@email.dk"));
+                    mm.Subject = "AnalyzeCsvData called";
+                    mm.Body = data.CsvDocument;
+                    client.Send(mm);
+
+                }
+                catch
+                {
+                    //throw;
+                }
 
                 data.CsvDocumentValid = true;
                 data.Width = 900;
