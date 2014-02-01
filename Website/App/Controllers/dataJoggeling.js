@@ -28,6 +28,7 @@ app.controller('dataJoggeling', function($http, $scope, $sce)
             .success(function (data, status, headers, config) {
                 $('.has-spinner').toggleClass('active');
                 $scope.csvData = data;
+                
                 if (!data.isError) {
                     $scope.incrementStep(1);
                 }
@@ -49,6 +50,25 @@ app.controller('dataJoggeling', function($http, $scope, $sce)
 
     $scope.ErrorMessage = function () {
         return $scope.csvData.ErrorMessage;
+    };
+
+    $scope.IsSupported = function (displayType) {
+        if ($scope.csvData.NotSupportedDisplayTypes == undefined)
+            return false;
+        for (var i = 0; i < $scope.csvData.NotSupportedDisplayTypes.length; i++) {
+            if ($scope.csvData.NotSupportedDisplayTypes[i] == displayType)
+                return false;
+        }
+        return true;
+    };
+
+    $scope.SetDisplayType = function (displayType) {
+        if ($scope.IsSupported(displayType))
+            $scope.csvData.DisplayType = displayType;
+    };
+
+    $scope.IsDisplayType = function (displayType) {
+        return $scope.csvData.DisplayType == displayType;
     };
 
     $scope.csvData =

@@ -27,8 +27,7 @@ namespace WebAPI.Controllers
             public Boolean isError { get; set; }
             public String ErrorMessage { get; set; }
 
-            public Boolean TimelineNotSupported { get; set; }
-            public Boolean ListNotSupported { get; set; }
+            public List<String> NotSupportedDisplayTypes { get; set; } 
         }
 
         public class Timeline
@@ -63,7 +62,7 @@ namespace WebAPI.Controllers
             {
                 if (String.IsNullOrEmpty(data.CsvDocument))
                     throw new Exception("Du skal indtaste et link til dokumentet");
-                
+
                 data.CsvDocumentValid = true;
                 data.Width = 900;
                 data.Columns = new List<Column>();
@@ -71,6 +70,7 @@ namespace WebAPI.Controllers
                 data.GroupBy = "";
                 data.FilterBy = "";
                 data.FilterValue = "";
+                data.NotSupportedDisplayTypes = new List<string>(); 
 
                 data.Timeline = new Timeline();
                 data.Timeline.OnlyShowLinesWithContent = true;
@@ -103,9 +103,10 @@ namespace WebAPI.Controllers
 
                 if (String.IsNullOrEmpty(data.Timeline.startDateColumn))
                 {
-                    data.TimelineNotSupported = true;
+                    data.NotSupportedDisplayTypes.Add("Timeline"); 
                     data.DisplayType = "List";
                 }
+
             }
             catch (Exception ex)
             {

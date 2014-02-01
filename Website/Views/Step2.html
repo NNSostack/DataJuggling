@@ -34,19 +34,19 @@
     }
 </style>
 <div class="row">
-    <div class="col-sm-6 col-md-3 thumbnailcontainer-{{csvData.DisplayType == 'Timeline'}}">
-        <div class="thumbnail" data-ng-click="csvData.DisplayType = 'Timeline'" >
+    <div class="col-sm-6 col-md-3 thumbnailcontainer-{{IsDisplayType('Timeline')}}">
+        <div class="thumbnail" data-ng-click="SetDisplayType('Timeline')" >
             <img alt="Tidslinie" src="img/Timeline.png">
-            <!--<div class="alert alert-danger">
+            <div class="alert alert-danger" data-ng-show="!IsSupported('Timeline')">
                 Visningen er ikke tilgængelig<br />
                 Påkrævet:<br />
                 1 tekstkolonne<br />
                 1 datokolonne
-            </div>-->
+            </div>
         </div>
     </div>
-    <div class="col-sm-6 col-md-3 thumbnailcontainer-{{csvData.DisplayType == 'List'}}">
-        <div class="thumbnail" data-ng-click="csvData.DisplayType = 'List'">
+    <div class="col-sm-6 col-md-3 thumbnailcontainer-{{IsDisplayType('List')}}">
+        <div class="thumbnail" data-ng-click="SetDisplayType('List')">
             <img alt="Liste" src="img/List.png">
         </div>
     </div>
