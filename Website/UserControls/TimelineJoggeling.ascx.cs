@@ -172,7 +172,7 @@ public partial class UserControls_TimelineJoggeling : System.Web.UI.UserControl
 
 
         Links += "]";
-        return "var timeLineObjects = [" + sb.ToString() + "]";
+        return "function timeLineObjects() { return [" + sb.ToString() + "] }";
 
 
         

@@ -34,17 +34,29 @@
     var offset = 0;
 
     function getTimeLineObjects(startDate, endDate) {
-        for( i = 0; i < timeLineObjects.length; i++)
+        
+        var clone = timeLineObjects();
+        for( i = 0; i < clone.length; i++)
         {
-            if( timeLineObjects[i][1] == "" )
+            if( clone[i][1] == "" )
             {
-                timeLineObjects[i][2] = startDate;
-                timeLineObjects[i][3] = timeLineObjects[i][2];
+                clone[i][2] = startDate;
+                clone[i][3] = clone[i][2];
+            }
+
+            if( clone[i][2] < startDate && clone[i][3] > startDate && clone[i][3] < endDate )
+            {
+                clone[i][2] = startDate;
+            }
+
+            if( clone[i][2] > startDate && clone[i][2] < endDate && clone[i][3] >= endDate )
+            {
+                clone[i][3] = endDate;
             }
         }
-        
-        var list = $.grep(timeLineObjects, function (timeline, i) {
-            return timeline[2] >= startDate && timeline[3] <= endDate;
+        //console.log(startDate, endDate);
+        var list = $.grep(clone, function (timeline, i) {
+            return timeline[2] >= startDate && timeline[2] <= endDate || timeline[3] >= startDate && timeline[3] <= endDate;
 
         });
 
@@ -57,11 +69,11 @@
             }
         }
 
-
-
+        //console.log(new Date(startDate.getTime() - 1), new Date(startDate.getTime() - 1));
+        //console.log(list);
         list.unshift([ 'Idag', '', new Date(startDate.getTime() - 1), new Date(startDate.getTime() - 1) ]);
         list.unshift([ 'Idag', '', endDate, endDate ]);
-        //console.log(list);
+
         return list;
 
     };
@@ -72,8 +84,6 @@
 
     function doDrawChart(sDate, eDate)
     {
-
-
         var container = document.getElementById('chartTimeline');
         var chart = new google.visualization.Timeline(container);
         var dataTable = new google.visualization.DataTable();
@@ -82,7 +92,7 @@
         dataTable.addColumn({ type: 'string', id: 'Deadline' });
         dataTable.addColumn({ type: 'date', id: 'Start' });
         dataTable.addColumn({ type: 'date', id: 'End' });
-
+        
         dataTable.addRows(
             getTimeLineObjects(sDate, eDate)
         );
