@@ -172,5 +172,9 @@ app.controller('dataJoggeling', function($http, $scope, $sce)
         return ret;
 
     };
+
+    $scope.isRSS = function () {
+        return $scope.csvData.DisplayType === 'RSS';
+    };
     
 });

@@ -45,10 +45,11 @@
     <div class="col-sm-6 col-md-6">
         <ul class="nav nav-tabs">
             <li class="active"><a href="#tab1" data-ng-show="csvData.CsvDocumentValid" data-toggle="tab">Generel</a></li>
-            <li><a href="#tab2" data-ng-show="csvData.CsvDocumentValid" data-toggle="tab">Gruppering</a></li>
+            <li data-ng-hide="isRSS()"><a href="#tab2" data-ng-show="csvData.CsvDocumentValid" data-toggle="tab">Gruppering</a></li>
             <li><a href="#tab3" data-ng-show="csvData.CsvDocumentValid" data-toggle="tab">Filtrering</a></li>
             <li><a href="#tab4" data-ng-show="csvData.DisplayType == 'Timeline'" data-toggle="tab">Tidsline</a></li>
             <li><a href="#tab5" data-ng-show="csvData.DisplayType == 'List'" data-toggle="tab">Liste</a></li>
+            <li><a href="#tab6" data-ng-show="isRSS()" data-toggle="tab">RSS</a></li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="tab1">
@@ -65,6 +66,9 @@
             </div>
             <div class="tab-pane" id="tab5">
                 <div data-ng-include src="'Views/List.html'"></div>
+            </div>
+            <div class="tab-pane" id="tab6">
+                <div data-ng-include src="'Views/RSS.html'"></div>
             </div>
 
         </div>

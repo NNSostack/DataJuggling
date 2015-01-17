@@ -1,4 +1,4 @@
-﻿<div class="form-group">
+﻿<div class="form-group" data-ng-hide="isRSS()">
     <label for="width" title="Bredde på chart">Bredde (px)</label>
     <input id="Text1" class="form-control" type="text" ng-model="csvData.Width" style="width: 200px;" />
 </div>
@@ -22,6 +22,12 @@
         <label>
             <input type="radio" name="optionsRadios" ng-model="csvData.DisplayType" id="optionsRadios2" value="List" />
             Listevisning   
+        </label>
+    </div>
+    <div class="radio">
+        <label>
+            <input type="radio" name="optionsRadios" ng-model="csvData.DisplayType" id="Radio1" value="RSS" />
+            RSS   
         </label>
     </div>
 </div>

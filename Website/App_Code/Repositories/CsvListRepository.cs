@@ -199,11 +199,14 @@ public class CsvListRepository
     {
         DateTime dt;
         Boolean b;
+        Uri uri;
         if (DateTime.TryParse(val, out dt))
             return "DateTime";
         if (Boolean.TryParse(val, out b))
             return "Boolean";
-
+        if (Uri.TryCreate(val, UriKind.Absolute, out uri))
+            return "Uri";
+        
         return "String";
 
     }

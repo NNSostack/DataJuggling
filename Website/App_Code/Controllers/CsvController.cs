@@ -20,6 +20,7 @@ namespace WebAPI.Controllers
             public Boolean HasColumnNames { get; set; }
             public int Width { get; set; }
             public Timeline Timeline { get; set; }
+            public RSS RSS { get; set; }
             public List<Column> Columns { get; set; }
             public String GroupBy { get; set; }
             public String FilterBy { get; set; }
@@ -43,6 +44,23 @@ namespace WebAPI.Controllers
             public String TextColumn { get; set; }
             public int NumberOfDaysToShowFromNow { get; set; }
             public Boolean OnlyShowLinesWithContent { get; set; }
+        }
+
+        public class RSS
+        {
+            public RSS()
+            {
+                NumberOfDaysToShowFromNow = -1;
+            }
+
+            public String Title { get; set; }
+            public String Description { get; set; }
+
+            public String DateColumn { get; set; }
+            public String TitleColumn { get; set; }
+            public String DescriptionColumn { get; set; }
+            public String LinkColumn { get; set; }
+            public int NumberOfDaysToShowFromNow { get; set; }
         }
 
         public class Column
@@ -94,6 +112,11 @@ namespace WebAPI.Controllers
                 data.Timeline.NumberOfDaysToShowFromNow = 28;
                 data.Timeline.endDateColumn = "";
 
+                data.RSS = new RSS();
+                data.RSS.Title = "Indtast overskrift her";
+                data.RSS.Description = "Indtast beskrivelse her";
+                data.RSS.NumberOfDaysToShowFromNow = 28;
+
                 data.DisplayType = "Timeline";
 
                 var list = CsvListRepository.GetList(data.CsvDocument, true, "", "", "", false, null);
@@ -101,20 +124,36 @@ namespace WebAPI.Controllers
                 foreach (var col in list.ColumnNames)
                 {
                     data.Columns.Add(new Column { Name = col.Name, Type = col.Type });
+
+
                     if (col.Type == "DateTime" && String.IsNullOrEmpty(data.Timeline.startDateColumn))
+                    {
                         data.Timeline.startDateColumn = col.Name;
+                        data.RSS.DateColumn = col.Name;
+                    }
                     else if (col.Type == "DateTime" && String.IsNullOrEmpty(data.Timeline.endDateColumn))
                         data.Timeline.endDateColumn = col.Name;
 
 
-                    if (col.Type == "String")
+                    if (col.Type == "String" || col.Type == "Uri")
                     {
                         if (String.IsNullOrEmpty(data.GroupBy))
                             data.GroupBy = col.Name;
                         else if (String.IsNullOrEmpty(data.Timeline.TextColumn))
                             data.Timeline.TextColumn = col.Name;
+
+                        if (col.Type == "String")
+                            if (String.IsNullOrEmpty(data.RSS.TitleColumn))
+                                data.RSS.TitleColumn = col.Name;
+                            else if (String.IsNullOrEmpty(data.RSS.DescriptionColumn))
+                                data.RSS.DescriptionColumn = col.Name;
+
                     }
 
+                    if (col.Type == "Uri" && String.IsNullOrEmpty(data.RSS.LinkColumn))
+                        data.RSS.LinkColumn = col.Name;
+
+                    
                 }
                 data.CsvDocument = list.CsvLink;
 
@@ -151,7 +190,7 @@ namespace WebAPI.Controllers
                 data.DisplayType,
                 HttpUtility.UrlEncode(data.CsvDocument),
                 data.HasColumnNames ? "1" : "0",
-                data.GroupBy,
+                data.DisplayType != "RSS" ? data.GroupBy : null,
                 data.Width,
                 data.FilterBy,
                 data.FilterValue,
@@ -166,6 +205,15 @@ namespace WebAPI.Controllers
 
             if (data.DisplayType == "List")
                 src += "&include=" + String.Join("|", data.Columns.Where(x => x.Include).Select(x => x.Name).ToArray());
+
+            if (data.DisplayType == "RSS")
+                src += "&Title=" + data.RSS.Title +
+                   "&Description=" + data.RSS.Description +
+                   "&DateColumn=" + data.RSS.DateColumn +
+                   "&TitleColumn=" + data.RSS.TitleColumn +
+                   "&DescriptionColumn=" + data.RSS.DescriptionColumn +
+                   "&LinkColumn=" + data.RSS.LinkColumn +
+                   "&numOfDaysToShow=" + data.RSS.NumberOfDaysToShowFromNow;
 
 
             var ret = new HttpResponseMessage();

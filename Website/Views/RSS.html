@@ -1,0 +1,71 @@
+﻿<fieldset>
+    <legend>RSS egenskaber</legend>
+
+    <div class="form-group"">
+        <label title="Overskrift for RSS Feed">Overskrift for RSS Feed</label>
+        <input class="form-control" type="text" ng-model="csvData.RSS.Title" style="width: 500px;" />
+    </div>
+
+    <div class="form-group"">
+        <label title="Overskrift for RSS Feed">Beskrivelse for RSS Feed</label>
+        <input class="form-control" type="text" ng-model="csvData.RSS.Description" style="width: 500px;" />
+    </div>
+
+    <legend>Kolonne opsætning</legend>
+
+    <div class="form-group" style="float:left;">
+        <label title="Benyt følgende kolonne som tekst">Overskrift</label>
+        <div class="radio" ng-repeat="col in getStringCols()">
+            <label>
+                <input type="radio" name="radioTitleColumn" ng-model="csvData.RSS.TitleColumn" value="{{col.Name}}" />
+                {{ col.Name }}
+            </label>
+        </div>
+    </div>
+
+    <div class="form-group" style="float:left;">
+        <label title="Benyt følgende kolonne som beskrivelse">Beskrivelse</label>
+        <div class="radio" ng-repeat="col in getStringCols()">
+            <label>
+                <input type="radio" name="radioTextColumn" ng-model="csvData.RSS.DescriptionColumn" value="{{col.Name}}" />
+                {{ col.Name }}
+            </label>
+        </div>
+    </div>
+
+    <div class="form-group" style="float:left;">
+        <label title="Benyt følgende kolonne som startdato">Dato</label>
+        <div class="radio" ng-repeat="col in getDateTimes()">
+            <label>
+                <input type="radio" name="radioStartDate" ng-model="csvData.RSS.DateColumn" value="{{col.Name}}" />
+                {{ col.Name }}
+            </label>
+        </div>
+    </div>
+
+    <div class="form-group" style="float:left;">
+        <label title="Benyt følgende som link">Link</label>
+        <div class="radio">
+            <label> 
+                <input type="radio" name="radioEndDate" ng-model="csvData.RSS.linkColumn" value="" />
+                Ingen
+            </label>
+        </div>
+        <div class="radio" ng-repeat="col in getLinks()">
+            <label>
+                <input type="radio" name="radioEndDate" ng-model="csvData.RSS.linkColumn" value="{{col.Name}}" />
+                {{ col.Name }}
+            </label>
+        </div>
+    </div>
+    <div style="clear:both;"></div>
+
+    <div class="form-group"">
+        <label title="Skal der Benyttes tidsinterval for tidslinien?">Tidsinterval</label>
+        <div class="form-group">
+            <label for="numberOfDays" title="Antal dage at vise frem i tiden">Angiv antal dage frem i tiden der skal vises (-1 betyder at alt vises)</label>
+            <input id="numberOfDays" class="form-control" type="text" ng-model="csvData.RSS.NumberOfDaysToShowFromNow" style="width: 200px;" />
+        </div>
+    </div>
+
+</fieldset>     
