@@ -17,7 +17,7 @@
         <label title="Benyt følgende kolonne som tekst">Overskrift</label>
         <div class="radio" ng-repeat="col in getStringCols()">
             <label>
-                <input type="radio" name="radioTitleColumn" ng-model="csvData.RSS.TitleColumn" value="{{col.Name}}" />
+                <input type="radio" name="radioRSSTitleColumn" ng-model="csvData.RSS.TitleColumn" value="{{col.Name}}" />
                 {{ col.Name }}
             </label>
         </div>
@@ -27,7 +27,7 @@
         <label title="Benyt følgende kolonne som beskrivelse">Beskrivelse</label>
         <div class="radio" ng-repeat="col in getStringCols()">
             <label>
-                <input type="radio" name="radioTextColumn" ng-model="csvData.RSS.DescriptionColumn" value="{{col.Name}}" />
+                <input type="radio" name="radioRSSTextColumn" ng-model="csvData.RSS.DescriptionColumn" value="{{col.Name}}" />
                 {{ col.Name }}
             </label>
         </div>
