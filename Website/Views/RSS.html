@@ -37,7 +37,7 @@
         <label title="Benyt følgende kolonne som startdato">Dato</label>
         <div class="radio" ng-repeat="col in getDateTimes()">
             <label>
-                <input type="radio" name="radioStartDate" ng-model="csvData.RSS.DateColumn" value="{{col.Name}}" />
+                <input type="radio" name="radioRSSStartDate" ng-model="csvData.RSS.DateColumn" value="{{col.Name}}" />
                 {{ col.Name }}
             </label>
         </div>
@@ -47,7 +47,7 @@
         <label title="Benyt følgende som link">Link</label>
         <div class="radio">
             <label> 
-                <input type="radio" name="radioEndDate" ng-model="csvData.RSS.linkColumn" value="" />
+                <input type="radio" name="radioRSSEndDate" ng-model="csvData.RSS.linkColumn" value="" />
                 Ingen
             </label>
         </div>

@@ -39,9 +39,9 @@ public class CsvListRepository
         
         
         
-        content = GetContent(csvLink);
+        content = GetContent(csvLink.Replace("dl=0", "dl=1"));
 
-        int iStart = content.IndexOf("https://dl.dropboxusercontent.com");
+        int iStart = content.IndexOf("//dl-web.dropbox.com/");
 
         if (iStart > 0)
         {

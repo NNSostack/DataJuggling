@@ -139,7 +139,8 @@ namespace WebAPI.Controllers
                     {
                         if (String.IsNullOrEmpty(data.GroupBy))
                             data.GroupBy = col.Name;
-                        else if (String.IsNullOrEmpty(data.Timeline.TextColumn))
+                        
+                        if (String.IsNullOrEmpty(data.Timeline.TextColumn))
                             data.Timeline.TextColumn = col.Name;
 
                         if (col.Type == "String")
