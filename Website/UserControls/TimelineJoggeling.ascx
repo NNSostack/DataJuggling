@@ -104,7 +104,10 @@
         };
 
         chart.draw(dataTable, options);
-        resize();
+        var height = resize();
+
+        options.height = height + 20;
+        chart.draw(dataTable, options);
 
         var minX = 99999;
         var maxX = 0;
@@ -148,7 +151,11 @@
         var svg = $($('#chartTimeline').find('svg')[0]);
         var g = $(svg.find('g')[0]);
         var rect = g.find('rect').last();
-        svg.height(parseInt(rect.attr('height')) + 40);
+        
+        var height = parseInt(rect.attr('height')) + 40; 
+        
+        svg.height(height);
+        return height; 
     };
 
     function Zoom(index, off)
