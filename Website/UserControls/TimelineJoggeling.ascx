@@ -36,6 +36,10 @@
     function getTimeLineObjects(startDate, endDate) {
         
         var clone = timeLineObjects();
+
+        var rangeStart = startDate;
+        var rangeEnd = endDate;
+
         for( i = 0; i < clone.length; i++)
         {
             if( clone[i][1] == "" )
@@ -43,16 +47,29 @@
                 clone[i][2] = startDate;
                 clone[i][3] = clone[i][2];
             }
-
-            if( clone[i][2] < startDate && clone[i][3] > startDate && clone[i][3] < endDate )
+            
+            var spanStart = clone[i][2];
+            var spanEnd = clone[i][3];
+            
+            if( spanStart < startDate && spanEnd > startDate && spanEnd < endDate )
             {
                 clone[i][2] = startDate;
             }
 
-            if( clone[i][2] > startDate && clone[i][2] < endDate && clone[i][3] >= endDate )
+            else if( spanStart > startDate && spanStart < endDate && spanEnd >= endDate )
             {
                 clone[i][3] = endDate;
             }
+
+            else if( spanStart <= rangeStart && spanEnd >= rangeEnd)
+            {
+                clone[i][2] = rangeStart;
+                clone[i][3] = rangeEnd;
+            }
+
+
+
+
         }
         //console.log(startDate, endDate);
         var list = $.grep(clone, function (timeline, i) {
