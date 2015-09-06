@@ -73,7 +73,7 @@
         }
         //console.log(startDate, endDate);
         var list = $.grep(clone, function (timeline, i) {
-            return timeline[2] >= startDate && timeline[2] <= endDate || timeline[3] >= startDate && timeline[3] <= endDate;
+            return timeline[2] >= startDate && timeline[2] <= endDate || timeline[3] >= startDate && timeline[3] <= endDate && timeline[2] < timeline[3];
 
         });
 
