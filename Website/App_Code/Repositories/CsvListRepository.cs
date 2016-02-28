@@ -52,8 +52,7 @@ public class CsvListRepository
                 content = GetContent(csvLink);
             }
         }
-
-
+        
         var lines = content.Split('\r');
 
         //var lines = System.IO.File.ReadAllLines(fileName, System.Text.Encoding.UTF7);

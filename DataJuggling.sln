@@ -22,13 +22,28 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Website", "Website\", "{C74
 		VWDVirtualPath = "/"
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailNotification", "EmailNotification\EmailNotification.csproj", "{1709C729-7154-4C83-8929-E9CEF931A33F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailNotificationTest", "EmailNotificationTest\EmailNotificationTest.csproj", "{AB1A16C0-3E31-4CF6-9F6C-9905E9F6DC76}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C74E2906-1AEF-48B9-A477-F8415E3A6F30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C74E2906-1AEF-48B9-A477-F8415E3A6F30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C74E2906-1AEF-48B9-A477-F8415E3A6F30}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{C74E2906-1AEF-48B9-A477-F8415E3A6F30}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{1709C729-7154-4C83-8929-E9CEF931A33F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1709C729-7154-4C83-8929-E9CEF931A33F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1709C729-7154-4C83-8929-E9CEF931A33F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1709C729-7154-4C83-8929-E9CEF931A33F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB1A16C0-3E31-4CF6-9F6C-9905E9F6DC76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB1A16C0-3E31-4CF6-9F6C-9905E9F6DC76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB1A16C0-3E31-4CF6-9F6C-9905E9F6DC76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB1A16C0-3E31-4CF6-9F6C-9905E9F6DC76}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
