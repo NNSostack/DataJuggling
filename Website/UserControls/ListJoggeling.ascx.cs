@@ -25,7 +25,7 @@ public partial class UserControls_ListJoggeling : System.Web.UI.UserControl
         var excatFilterMatch = Request.QueryString["excatMatch"] == "1" ? true : false;
         var columns = (Request.QueryString["include"] ?? "").Split('|');
 
-        var list = CsvListRepository.GetList(
+        var list = Csv.CsvListRepository.GetList(
             csv,
             hasColumnNames, groupBy, filterBy, filterValue, excatFilterMatch, columns);
 

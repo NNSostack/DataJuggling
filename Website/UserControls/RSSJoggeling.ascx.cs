@@ -25,7 +25,7 @@ public partial class UserControls_RSSJoggeling : System.Web.UI.UserControl
         var title = Request.QueryString["title"];
         var description = Request.QueryString["Description"];
 
-        var list = CsvListRepository.GetList(
+        var list = Csv.CsvListRepository.GetList(
             csv,
             hasColumnNames, groupBy, filterBy, filterValue, excatFilterMatch, null);
 
@@ -45,7 +45,7 @@ public partial class UserControls_RSSJoggeling : System.Web.UI.UserControl
         StringBuilder sb = new StringBuilder();
 
         
-        var orderedList = list.ToList<IListEntry>().SelectMany(x => x.Rows).ToList();
+        var orderedList = list.ToList<Csv.Interfaces.IListEntry>().SelectMany(x => x.Rows).ToList();
 
         if (iDateColumn > -1)
         {

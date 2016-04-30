@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace EmailNotification.Interfaces
 {
-    public interface ISettings
+    public interface IEmailNotificationUrls
     {
-        List<Settings> GetSettings();
-        Settings GetSettingsFromUrl(String url);
+        List<String> GetEmailNotificationUrls();
     }
 }

@@ -41,5 +41,9 @@ namespace EmailNotification.Model
         public String TextField { get; set; }
         public String EmailField { get; set; }
         public Boolean HasColumnHeaders { get; set; }
+
+        public string EmailSubject { get; set; }
+
+        public string Email { get; set; }
     }
 }

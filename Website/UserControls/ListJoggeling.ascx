@@ -23,7 +23,7 @@
         <ItemTemplate>
                 <tbody class="table-responsive">
                     <tr>
-                        <td colspan="<%# ((System.Collections.Generic.List<IColumnName>)columnNames.DataSource).Count %>">
+                        <td colspan="<%# ((System.Collections.Generic.List<Csv.Interfaces.IColumnName>)columnNames.DataSource).Count %>">
                             <h2><%# Eval("title") %></h2>
                         </td>
                     </tr>

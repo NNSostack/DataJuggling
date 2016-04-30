@@ -9,7 +9,7 @@ namespace EmailNotification.Interfaces
 {
     public interface IEmailNotificationItems
     {
-        List<EmailNotificationItem> GetEmailNotificationItems(String csvFile);
+        List<EmailNotificationItem> GetEmailNotificationItems(Settings settings);
         void SetEmailNotifications(String csvFile);
 
     }

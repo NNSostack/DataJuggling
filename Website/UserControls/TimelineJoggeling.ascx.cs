@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Csv.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -44,7 +45,7 @@ public partial class UserControls_TimelineJoggeling : System.Web.UI.UserControl
         if( !int.TryParse(Request.QueryString["numOfDaysToShow"], out numberOfDaysToShow) )
             numberOfDaysToShow = -1;
 
-        var list = CsvListRepository.GetList(
+        var list = Csv.CsvListRepository.GetList(
             csv,
             hasColumnNames, groupBy, filterBy, filterValue, excatFilterMatch, null);
 

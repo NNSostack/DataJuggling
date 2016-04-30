@@ -119,7 +119,7 @@ namespace WebAPI.Controllers
 
                 data.DisplayType = "Timeline";
 
-                var list = CsvListRepository.GetList(data.CsvDocument, true, "", "", "", false, null);
+                var list = Csv.CsvListRepository.GetList(data.CsvDocument, true, "", "", "", false, null);
 
                 foreach (var col in list.ColumnNames)
                 {

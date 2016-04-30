@@ -52,11 +52,7 @@ namespace EmailNotificationTest
                     LastRun = DateTime.MinValue
                 };
 
-            _settings.GetSettings().Returns(new System.Collections.Generic.List<EmailNotification.Model.Settings>
-                {
-                    _setting
-                }
-            );
+            _settings.GetSettingsFromUrl("url").Returns(_setting);
 
             _status.GetStatus(_setting.Id).Returns(_statusItem);
 
@@ -113,12 +109,12 @@ namespace EmailNotificationTest
             };
             
 
-            _emailNotificationItems.GetEmailNotificationItems(_setting.CsvFile).Returns(              
+            _emailNotificationItems.GetEmailNotificationItems(_setting).Returns(              
                _emailNotificationItemList
             );
 
             EmailNotification.EmailNotification repo = new EmailNotification
-            .EmailNotification(_logging, _date, _settings, _emailNotificationItems, _sendEmail, _status, "emailFrom", "emailSubject");
+            .EmailNotification(_logging, _date, _settings, _emailNotificationItems, _sendEmail, _status, "emailFrom", "url");
 
             return repo;
 

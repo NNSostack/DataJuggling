@@ -27,9 +27,14 @@ namespace EmailNotification.Services
         static Object myLock = new object();
         public void Msg(string msg)
         {
-            var file = System.IO.Path.Combine(_path, "log-" + DateTime.Now.Date.ToString("YYYYmmdd") + ".log"); 
+            var file = System.IO.Path.Combine(_path, "log-" + DateTime.Now.Date.ToString("yyyyMMdd") + ".log"); 
             lock(myLock)
             {
+                if (System.Web.HttpContext.Current != null)
+                {
+                    System.Web.HttpContext.Current.Response.Write(msg + "<br/>");
+                    System.Web.HttpContext.Current.Response.Flush();
+                }
                 System.IO.File.AppendAllLines(file, new String[] { msg });
             }
         }
