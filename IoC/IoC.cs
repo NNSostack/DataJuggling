@@ -23,7 +23,7 @@ namespace IoC
                 return new SettingsRepository(Get<IEmailNotificationUrls>()) as T;
 
             if (typeof(T) == typeof(IEmailNotificationUrls))
-                return new EmailNotificationUrls(System.Web.HttpContext.Current.Server.MapPath("App_Config/settings.txt")) as T;
+                return new EmailNotificationUrls(System.Web.HttpContext.Current.Server.MapPath("App_Data/settings.txt")) as T;
 
             if (typeof(T) == typeof(IEmailNotificationItems))
                 return new EmailNotificationRepository() as T;

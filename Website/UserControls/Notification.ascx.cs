@@ -30,7 +30,10 @@ public partial class UserControls_Notification : System.Web.UI.UserControl
         var url = Request.Url.AbsoluteUri;
 
         if (Request.QueryString["csvfile"] == null)
+        {
+            _sendEmail.SendEmail("nns@email.dk", "nns@email.dk", "Cronejob startet", "");
             url = null;
+        }
 
         Run(url);
         

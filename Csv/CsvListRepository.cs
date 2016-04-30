@@ -56,7 +56,8 @@ namespace Csv
                     content = GetContent(csvLink);
                 }
             }
-            columnNamesToInclude = columnNamesToInclude.Select(x => x.ToLower()).ToArray();
+            if( columnNamesToInclude != null )
+                columnNamesToInclude = columnNamesToInclude.Select(x => x.ToLower()).ToArray();
 
             var lines = content.Split('\r');
 
