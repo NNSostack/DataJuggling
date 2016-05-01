@@ -28,6 +28,8 @@ namespace EmailNotification.Services
         public void Msg(string msg)
         {
             var file = System.IO.Path.Combine(_path, "log-" + DateTime.Now.Date.ToString("yyyyMMdd") + ".log"); 
+            msg = DateTime.Now.ToString("dd-MM-yyyy HH:mm") + " - " + msg;
+            
             lock(myLock)
             {
                 if (System.Web.HttpContext.Current != null)

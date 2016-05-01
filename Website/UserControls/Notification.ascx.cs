@@ -17,6 +17,7 @@ public partial class UserControls_Notification : System.Web.UI.UserControl
     private IEmail _sendEmail;
     private IStatus _status;
 
+    static int numberOfRun = 0;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -31,7 +32,13 @@ public partial class UserControls_Notification : System.Web.UI.UserControl
 
         if (Request.QueryString["csvfile"] == null)
         {
-            _sendEmail.SendEmail("nns@email.dk", "nns@email.dk", "Cronejob startet", "");
+            numberOfRun++;
+            _logging.Msg("CroneJob startet");
+            if (DateTime.Now.Hour == 8)
+            {
+                _sendEmail.SendEmail("nns@email.dk", "nns@email.dk", "Cronejob startet kl. 8:00, antal gange det er kørt siden sidst: " + numberOfRun, "");
+                numberOfRun = 0;
+            }
             url = null;
         }
 

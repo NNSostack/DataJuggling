@@ -59,7 +59,9 @@ namespace EmailNotification
 
                     if (!RunToday(status))
                     {
-                        _log.Info("  Setting found, not run today: " + setting.Id + ", " + setting.CsvFile);
+                        _log.Msg("*********************************************************");
+
+                        _log.Msg("  Setting found, not run today: " + setting.Id + ", " + setting.CsvFile);
                         if (setting.Frequence == Model.eFrequence.eDaily)
                         {
                             predicate = new Func<EmailNotificationItem, bool>(x => x.Deadline <= now.AddDays(2));
@@ -140,7 +142,7 @@ namespace EmailNotification
                 if (!String.IsNullOrEmpty(grp.Key))
                 {
                     _log.Msg("          Email sent to: " + grp.Key);
-                    _sendEmail.SendEmail(grp.Key, _emailFrom, setting.EmailSubject, String.Join("\r\n", grp.Select(x => x.Deadline.ToString("dd-MM-yyyy") + " - " + x.Text).ToArray()));
+                    _sendEmail.SendEmail(grp.Key, _emailFrom, setting.EmailSubject, String.Join("\r\n", grp.OrderBy(x => x.Deadline).Select(x => x.Deadline.ToString("dd-MM-yyyy") + " - " + x.Text).ToArray()));
                 }
             }
         }
