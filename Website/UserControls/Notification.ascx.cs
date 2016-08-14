@@ -32,8 +32,8 @@ public partial class UserControls_Notification : System.Web.UI.UserControl
 
         if (Request.QueryString["csvfile"] == null)
         {
-            numberOfRun++;
-            _logging.Msg("CroneJob startet");
+            numberOfRun += 1;
+            _logging.Msg("CroneJob startet, " + numberOfRun);
             if (DateTime.Now.Hour == 8)
             {
                 _sendEmail.SendEmail("nns@email.dk", "nns@email.dk", "Cronejob startet kl. 8:00, antal gange det er kørt siden sidst: " + numberOfRun, "");
