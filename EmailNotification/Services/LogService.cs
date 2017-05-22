@@ -10,11 +10,13 @@ namespace EmailNotification.Services
     public class LogService : ILog
     {
         private bool _includeInfo;
+        private bool _includeDebug;
         private string _path;
 
-        public LogService(Boolean includeInfo, String path)
+        public LogService(Boolean includeInfo, Boolean includeDebug, String path)
         {
             _includeInfo = includeInfo;
+            _includeDebug = includeDebug;
             _path = path;
         }
 
@@ -22,6 +24,12 @@ namespace EmailNotification.Services
         {
             if( _includeInfo )
                 Msg("INFO: " + msg);
+        }
+
+        public void Debug(string msg)
+        {
+            if (_includeDebug)
+                Msg("DEBUG: " + msg);
         }
 
         static Object myLock = new object();

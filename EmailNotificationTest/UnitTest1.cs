@@ -43,7 +43,8 @@ namespace EmailNotificationTest
             _setting = new Settings
                 {
                     Id = Guid.NewGuid(),
-                    CsvFile = "csvFile"
+                    CsvFile = "csvFile",
+                    EmailSubject = "emailSubject"
                 };
 
 
@@ -105,6 +106,12 @@ namespace EmailNotificationTest
                         Deadline = now.AddDays(35),
                         Email = "nns@email35.dk",
                         Text = "Text35"
+                    },
+                    new EmailNotificationItem
+                    {
+                        Deadline = now.AddDays(70),
+                        Email = "nns@email70-1.dk;nns@email70-2.dk",
+                        Text = "Text70-1-2"
                     }
             };
             
@@ -134,7 +141,7 @@ namespace EmailNotificationTest
             _logging.Received().Info("  Setting found, not run today: " + _setting.Id + ", " + _setting.CsvFile);
             _logging.Received().Msg("      Job started, Daily run");
             
-            _sendEmail.Received().SendEmail("nns@email.dk", "emailFrom", "emailSubject", "Text");
+            _sendEmail.Received().SendEmail("nns@email.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text")));
         }
 
         [TestMethod]
@@ -151,7 +158,7 @@ namespace EmailNotificationTest
             _logging.DidNotReceive().Info("  Setting found, not run today: " + _setting.Id + ", " + _setting.CsvFile);
             _logging.DidNotReceive().Msg("      Job started, Daily run");
 
-            _sendEmail.DidNotReceiveWithAnyArgs().SendEmail("nns@email.dk", "emailFrom", "emailSubject", "Text");
+            _sendEmail.DidNotReceiveWithAnyArgs().SendEmail("nns@email.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text")));
         }
 
 
@@ -170,7 +177,7 @@ namespace EmailNotificationTest
             _status.Received().SetLastRun(_setting.Id);
             _logging.Received().Info("  Setting found, not run today: " + _setting.Id + ", " + _setting.CsvFile);
 
-            _sendEmail.DidNotReceiveWithAnyArgs().SendEmail("nns@email.dk", "emailFrom", "emailSubject", "Text");
+            _sendEmail.DidNotReceiveWithAnyArgs().SendEmail("nns@email.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text")));
 
         }
 
@@ -189,10 +196,10 @@ namespace EmailNotificationTest
             _logging.Received().Info("  Setting found, not run today: " + _setting.Id + ", " + _setting.CsvFile);
             _logging.Received().Msg("      Job started, Weekly run on specific day of week: " + _now.DayOfWeek);
 
-            _sendEmail.Received().SendEmail("nns@email.dk", "emailFrom", "emailSubject", "Text");
-            _sendEmail.Received().SendEmail("nns@email3.dk", "emailFrom", "emailSubject", "Text3");
-            _sendEmail.Received().SendEmail("nns@email7.dk", "emailFrom", "emailSubject", "Text7");
-            _sendEmail.DidNotReceive().SendEmail("nns@email14.dk", "emailFrom", "emailSubject", "Text14");
+            _sendEmail.Received().SendEmail("nns@email.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text")));
+            _sendEmail.Received().SendEmail("nns@email3.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text3")));
+            _sendEmail.Received().SendEmail("nns@email7.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text7")));
+            _sendEmail.DidNotReceive().SendEmail("nns@email14.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text14")));
 
         }
 
@@ -210,10 +217,10 @@ namespace EmailNotificationTest
             _logging.Received().Info("  Setting found, not run today: " + _setting.Id + ", " + _setting.CsvFile);
             _logging.Received().Msg("      Job started, Weekly run on first day of week");
 
-            _sendEmail.Received().SendEmail("nns@email.dk", "emailFrom", "emailSubject", "Text");
-            _sendEmail.Received().SendEmail("nns@email3.dk", "emailFrom", "emailSubject", "Text3");
-            _sendEmail.Received().SendEmail("nns@email7.dk", "emailFrom", "emailSubject", "Text7");
-            _sendEmail.DidNotReceive().SendEmail("nns@email14.dk", "emailFrom", "emailSubject", "Text14");
+            _sendEmail.Received().SendEmail("nns@email.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text")));
+            _sendEmail.Received().SendEmail("nns@email3.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text3")));
+            _sendEmail.Received().SendEmail("nns@email7.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text7")));
+            _sendEmail.DidNotReceive().SendEmail("nns@email14.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text14")));
         }
 
         [TestMethod]
@@ -230,7 +237,7 @@ namespace EmailNotificationTest
             _logging.Received().Info("  Setting found, not run today: " + _setting.Id + ", " + _setting.CsvFile);
             _logging.DidNotReceive().Msg("      Job started, Weekly run on first day of week");
 
-            _sendEmail.DidNotReceiveWithAnyArgs().SendEmail("nns@email.dk", "emailFrom", "emailSubject", "Text");
+            _sendEmail.DidNotReceiveWithAnyArgs().SendEmail("nns@email.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text")));
         }
 
         [TestMethod]
@@ -247,10 +254,10 @@ namespace EmailNotificationTest
             _logging.Received().Info("  Setting found, not run today: " + _setting.Id + ", " + _setting.CsvFile);
             _logging.Received().Msg("      Job started, Weekly run on last day of week");
 
-            _sendEmail.Received().SendEmail("nns@email.dk", "emailFrom", "emailSubject", "Text");
-            _sendEmail.Received().SendEmail("nns@email3.dk", "emailFrom", "emailSubject", "Text3");
-            _sendEmail.Received().SendEmail("nns@email7.dk", "emailFrom", "emailSubject", "Text7");
-            _sendEmail.DidNotReceive().SendEmail("nns@email14.dk", "emailFrom", "emailSubject", "Text14");
+            _sendEmail.Received().SendEmail("nns@email.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text")));
+            _sendEmail.Received().SendEmail("nns@email3.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text3")));
+            _sendEmail.Received().SendEmail("nns@email7.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text7")));
+            _sendEmail.DidNotReceive().SendEmail("nns@email14.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text14")));
         }
 
         [TestMethod]
@@ -267,7 +274,7 @@ namespace EmailNotificationTest
             _logging.Received().Info("  Setting found, not run today: " + _setting.Id + ", " + _setting.CsvFile);
             _logging.DidNotReceive().Msg("      Job started, Weekly run on last day of week");
 
-            _sendEmail.DidNotReceiveWithAnyArgs().SendEmail("nns@email.dk", "emailFrom", "emailSubject", "Text");
+            _sendEmail.DidNotReceiveWithAnyArgs().SendEmail("nns@email.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text")));
         }
 
         [TestMethod]
@@ -284,13 +291,15 @@ namespace EmailNotificationTest
             _logging.Received().Info("  Setting found, not run today: " + _setting.Id + ", " + _setting.CsvFile);
             _logging.Received().Msg("      Job started, Monthly run on first day of month");
 
-            _sendEmail.Received().SendEmail("nns@email.dk", "emailFrom", "emailSubject", "Text");
-            _sendEmail.Received().SendEmail("nns@email3.dk", "emailFrom", "emailSubject", "Text3");
-            _sendEmail.Received().SendEmail("nns@email7.dk", "emailFrom", "emailSubject", "Text7");
-            _sendEmail.Received().SendEmail("nns@email14.dk", "emailFrom", "emailSubject", "Text14");
-            _sendEmail.Received().SendEmail("nns@email21.dk", "emailFrom", "emailSubject", "Text21");
-            _sendEmail.Received().SendEmail("nns@email25.dk", "emailFrom", "emailSubject", "Text25");
-            _sendEmail.DidNotReceive().SendEmail("nns@email35.dk", "emailFrom", "emailSubject", "Text35");
+            _sendEmail.Received().SendEmail("nns@email.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text")));
+            _sendEmail.Received().SendEmail("nns@email3.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text3")));
+            _sendEmail.Received().SendEmail("nns@email7.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text7")));
+            _sendEmail.Received().SendEmail("nns@email14.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text14")));
+            _sendEmail.Received().SendEmail("nns@email21.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text21")));
+            _sendEmail.Received().SendEmail("nns@email25.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text25")));
+            _sendEmail.Received().SendEmail("nns@email35.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text35")));
+            _sendEmail.DidNotReceive().SendEmail("nns@email70-1.dk", "emailFrom", "emailSubject", Arg.Any<String>());
+            _sendEmail.DidNotReceive().SendEmail("nns@email70-2.dk", "emailFrom", "emailSubject", Arg.Any<String>());
         }
 
         [TestMethod]
@@ -307,7 +316,7 @@ namespace EmailNotificationTest
             _logging.Received().Info("  Setting found, not run today: " + _setting.Id + ", " + _setting.CsvFile);
             _logging.DidNotReceive().Msg("      Job started, Monthly run on first day of month");
 
-            _sendEmail.DidNotReceiveWithAnyArgs().SendEmail("nns@email.dk", "emailFrom", "emailSubject", "Text");
+            _sendEmail.DidNotReceiveWithAnyArgs().SendEmail("nns@email.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text")));
         }
 
 
@@ -325,13 +334,16 @@ namespace EmailNotificationTest
             _logging.Received().Info("  Setting found, not run today: " + _setting.Id + ", " + _setting.CsvFile);
             _logging.Received().Msg("      Job started, Monthly run on last day of month");
 
-            _sendEmail.Received().SendEmail("nns@email.dk", "emailFrom", "emailSubject", "Text");
-            _sendEmail.Received().SendEmail("nns@email3.dk", "emailFrom", "emailSubject", "Text3");
-            _sendEmail.Received().SendEmail("nns@email7.dk", "emailFrom", "emailSubject", "Text7");
-            _sendEmail.Received().SendEmail("nns@email14.dk", "emailFrom", "emailSubject", "Text14");
-            _sendEmail.Received().SendEmail("nns@email21.dk", "emailFrom", "emailSubject", "Text21");
-            _sendEmail.Received().SendEmail("nns@email25.dk", "emailFrom", "emailSubject", "Text25");
-            _sendEmail.DidNotReceive().SendEmail("nns@email35.dk", "emailFrom", "emailSubject", "Text35");
+            _sendEmail.Received().SendEmail("nns@email.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text")));
+            _sendEmail.Received().SendEmail("nns@email3.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text3")));
+            _sendEmail.Received().SendEmail("nns@email7.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text7")));
+            _sendEmail.Received().SendEmail("nns@email14.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text14")));
+            _sendEmail.Received().SendEmail("nns@email21.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text21")));
+            _sendEmail.Received().SendEmail("nns@email25.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text25")));
+            _sendEmail.Received().SendEmail("nns@email35.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text35")));
+            _sendEmail.DidNotReceive().SendEmail("nns@email70-1.dk", "emailFrom", "emailSubject", Arg.Any<String>());
+            _sendEmail.DidNotReceive().SendEmail("nns@email70-2.dk", "emailFrom", "emailSubject", Arg.Any<String>());
+
         }
 
 
@@ -350,7 +362,7 @@ namespace EmailNotificationTest
             _logging.Received().Info("  Setting found, not run today: " + _setting.Id + ", " + _setting.CsvFile);
             _logging.DidNotReceive().Msg("      Job started, Monthly run on last day of month");
 
-            _sendEmail.DidNotReceiveWithAnyArgs().SendEmail("nns@email.dk", "emailFrom", "emailSubject", "Text");
+            _sendEmail.DidNotReceiveWithAnyArgs().SendEmail("nns@email.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text")));
         }
 
 
@@ -369,13 +381,16 @@ namespace EmailNotificationTest
             _logging.Received().Info("  Setting found, not run today: " + _setting.Id + ", " + _setting.CsvFile);
             _logging.Received().Msg("      Job started, Monthly run on specific day of month: " + _setting.DayOfMonth);
 
-            _sendEmail.Received().SendEmail("nns@email.dk", "emailFrom", "emailSubject", "Text");
-            _sendEmail.Received().SendEmail("nns@email3.dk", "emailFrom", "emailSubject", "Text3");
-            _sendEmail.Received().SendEmail("nns@email7.dk", "emailFrom", "emailSubject", "Text7");
-            _sendEmail.Received().SendEmail("nns@email14.dk", "emailFrom", "emailSubject", "Text14");
-            _sendEmail.Received().SendEmail("nns@email21.dk", "emailFrom", "emailSubject", "Text21");
-            _sendEmail.Received().SendEmail("nns@email25.dk", "emailFrom", "emailSubject", "Text25");
-            _sendEmail.DidNotReceive().SendEmail("nns@email35.dk", "emailFrom", "emailSubject", "Text35");
+            _sendEmail.Received().SendEmail("nns@email.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text")));
+            _sendEmail.Received().SendEmail("nns@email3.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text3")));
+            _sendEmail.Received().SendEmail("nns@email7.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text7")));
+            _sendEmail.Received().SendEmail("nns@email14.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text14")));
+            _sendEmail.Received().SendEmail("nns@email21.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text21")));
+            _sendEmail.Received().SendEmail("nns@email25.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text25")));
+            _sendEmail.Received().SendEmail("nns@email35.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text35")));
+            _sendEmail.DidNotReceive().SendEmail("nns@email70-1.dk", "emailFrom", "emailSubject", Arg.Any<String>());
+            _sendEmail.DidNotReceive().SendEmail("nns@email70-2.dk", "emailFrom", "emailSubject", Arg.Any<String>());
+
         }
         
         [TestMethod]
@@ -393,8 +408,27 @@ namespace EmailNotificationTest
             _logging.Received().Info("  Setting found, not run today: " + _setting.Id + ", " + _setting.CsvFile);
             _logging.DidNotReceive().Msg("      Job started, Monthly run on specific day of month: " + _setting.DayOfMonth);
 
-            _sendEmail.DidNotReceiveWithAnyArgs().SendEmail("nns@email.dk", "emailFrom", "emailSubject", "Text");
+            _sendEmail.DidNotReceiveWithAnyArgs().SendEmail("nns@email.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text")));
         }
+
+        [TestMethod]
+        public void DayliRunWithMultipleEmails()
+        {
+            var repo = Substitute();
+
+            _date.GetNow().Returns(_now.AddDays(70));
+            _setting.Frequence = eFrequence.eDaily;
+
+            repo.Run();
+
+            _status.Received().SetLastRun(_setting.Id);
+            _logging.Received().Info("  Setting found, not run today: " + _setting.Id + ", " + _setting.CsvFile);
+            _logging.Received().Msg("      Job started, Daily run");
+
+            _sendEmail.Received().SendEmail("nns@email70-1.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text70-1-2")));
+            _sendEmail.Received().SendEmail("nns@email70-2.dk", "emailFrom", "emailSubject", Arg.Do<String>(x => x.EndsWith("- Text70-1-2")));
+        }
+
 
     }
 }

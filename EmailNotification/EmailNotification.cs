@@ -47,8 +47,8 @@ namespace EmailNotification
                 try
                 {
 
-                    _log.Info("*********************************************************");
-                    _log.Info("  Setting found: " + setting.Id + ", " + setting.CsvFile + ", last run: " + _status.GetStatus(setting.Id).LastRun);
+                    _log.Debug("*********************************************************");
+                    _log.Debug("  Setting found: " + setting.Id + ", " + setting.CsvFile + ", last run: " + _status.GetStatus(setting.Id).LastRun);
                     var status = _status.GetStatus(setting.Id);
                     Boolean doRun = false;
 
@@ -59,9 +59,9 @@ namespace EmailNotification
 
                     if (!RunToday(status))
                     {
-                        _log.Msg("*********************************************************");
+                        _log.Debug("*********************************************************");
 
-                        _log.Msg("  Setting found, not run today: " + setting.Id + ", " + setting.CsvFile);
+                        _log.Info("  Setting found, not run today: " + setting.Id + ", " + setting.CsvFile);
                         if (setting.Frequence == Model.eFrequence.eDaily)
                         {
                             predicate = new Func<EmailNotificationItem, bool>(x => x.Deadline <= now.AddDays(2));
@@ -141,8 +141,12 @@ namespace EmailNotification
             {
                 if (!String.IsNullOrEmpty(grp.Key))
                 {
-                    _log.Msg("          Email sent to: " + grp.Key);
-                    _sendEmail.SendEmail(grp.Key, _emailFrom, setting.EmailSubject, String.Join("\r\n", grp.OrderBy(x => x.Deadline).Select(x => x.Deadline.ToString("dd-MM-yyyy") + " - " + x.Text).ToArray()));
+                    string text = String.Join("\r\n", grp.OrderBy(x => x.Deadline).Select(x => x.Deadline.ToString("dd-MM-yyyy") + " - " + x.Text).ToArray());
+                    foreach (var email in grp.Key.Split(';'))
+                    {
+                        _log.Msg("          Email sent to: " + email);
+                        _sendEmail.SendEmail(email, _emailFrom, setting.EmailSubject, text);
+                    }
                 }
             }
         }

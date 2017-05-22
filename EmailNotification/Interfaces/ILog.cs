@@ -8,6 +8,7 @@ namespace EmailNotification.Interfaces
 {
     public interface ILog
     {
+        void Debug(String msg);
         void Info(String msg);
         void Msg(String msg);
         void Error(String msg);

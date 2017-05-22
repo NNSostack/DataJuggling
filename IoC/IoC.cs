@@ -17,7 +17,7 @@ namespace IoC
                 return new DateService() as T;
 
             if (typeof(T) == typeof(ILog))
-                return new LogService(System.Web.HttpContext.Current.Request.QueryString["croneJob"] == null, System.Web.HttpContext.Current.Server.MapPath("App_Data")) as T;
+                return new LogService(System.Web.HttpContext.Current.Request.QueryString["croneJob"] == null, System.Web.HttpContext.Current.Request.QueryString["croneJob"] == null, System.Web.HttpContext.Current.Server.MapPath("App_Data")) as T;
 
             if (typeof(T) == typeof(ISettings))
                 return new SettingsRepository(Get<IEmailNotificationUrls>()) as T;
