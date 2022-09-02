@@ -186,7 +186,7 @@ namespace Csv
                 client.HeadOnly = false;
                 // check 'tis not binary... we'll use text/, but could
                 // check for text/html
-                if (type.StartsWith(@"text/") || IsTextExtension(csvLink))
+                if (type == "application/json" || type.StartsWith(@"text/") || IsTextExtension(csvLink))
                 {
                     client.HeadOnly = false;
                     content = client.DownloadString(uri);

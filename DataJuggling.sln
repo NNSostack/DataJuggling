@@ -1,6 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Web
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32510.428
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailNotification", "EmailNotification\EmailNotification.csproj", "{1709C729-7154-4C83-8929-E9CEF931A33F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailNotificationTest", "EmailNotificationTest\EmailNotificationTest.csproj", "{AB1A16C0-3E31-4CF6-9F6C-9905E9F6DC76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IoC", "IoC\IoC.csproj", "{5A2982CE-6C11-4DDC-AD23-826DAB341534}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Csv", "Csv\Csv.csproj", "{7195AD82-0BED-449A-BE2E-49EA764BB419}"
+EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Website", "Website\", "{C74E2906-1AEF-48B9-A477-F8415E3A6F30}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
@@ -21,15 +31,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Website", "Website\", "{C74
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "57290"
 		VWDVirtualPath = "/"
+		SlnRelativePath = "Website\"
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailNotification", "EmailNotification\EmailNotification.csproj", "{1709C729-7154-4C83-8929-E9CEF931A33F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailNotificationTest", "EmailNotificationTest\EmailNotificationTest.csproj", "{AB1A16C0-3E31-4CF6-9F6C-9905E9F6DC76}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IoC", "IoC\IoC.csproj", "{5A2982CE-6C11-4DDC-AD23-826DAB341534}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Csv", "Csv\Csv.csproj", "{7195AD82-0BED-449A-BE2E-49EA764BB419}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,10 +40,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C74E2906-1AEF-48B9-A477-F8415E3A6F30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C74E2906-1AEF-48B9-A477-F8415E3A6F30}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C74E2906-1AEF-48B9-A477-F8415E3A6F30}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{C74E2906-1AEF-48B9-A477-F8415E3A6F30}.Release|Any CPU.Build.0 = Debug|Any CPU
 		{1709C729-7154-4C83-8929-E9CEF931A33F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1709C729-7154-4C83-8929-E9CEF931A33F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1709C729-7154-4C83-8929-E9CEF931A33F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -57,8 +56,15 @@ Global
 		{7195AD82-0BED-449A-BE2E-49EA764BB419}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7195AD82-0BED-449A-BE2E-49EA764BB419}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7195AD82-0BED-449A-BE2E-49EA764BB419}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C74E2906-1AEF-48B9-A477-F8415E3A6F30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C74E2906-1AEF-48B9-A477-F8415E3A6F30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C74E2906-1AEF-48B9-A477-F8415E3A6F30}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{C74E2906-1AEF-48B9-A477-F8415E3A6F30}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B57CE285-BBE6-4C4C-A4BC-6588BAF1AD20}
 	EndGlobalSection
 EndGlobal
