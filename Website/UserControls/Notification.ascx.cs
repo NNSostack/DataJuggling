@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -28,6 +29,9 @@ public partial class UserControls_Notification : System.Web.UI.UserControl
         _sendEmail = IoC.IoC.Get<IEmail>();
         _status = IoC.IoC.Get<IStatus>();
 
+        ServicePointManager.Expect100Continue = true;
+        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
         var url = Request.Url.AbsoluteUri;
 
         if (Request.QueryString["csvfile"] == null)
@@ -36,14 +40,13 @@ public partial class UserControls_Notification : System.Web.UI.UserControl
             _logging.Msg("CroneJob startet, " + numberOfRun);
             if (DateTime.Now.Hour == 8)
             {
-                _sendEmail.SendEmail("nns@email.dk", "nns@email.dk", "Cronejob startet kl. 8:00, antal gange det er kørt siden sidst: " + numberOfRun, "");
+                _sendEmail.SendEmail("nns@kiffodbold.dk", "sending@datajonglering.dk", "Cronejob startet kl. 8:00, antal gange det er kørt siden sidst: " + numberOfRun, "");
                 numberOfRun = 0;
             }
             url = null;
         }
 
         Run(url);
-        
     }
 
     void Run(String url)

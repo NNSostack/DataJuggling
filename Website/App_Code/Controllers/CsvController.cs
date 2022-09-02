@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Mail;
 using System.Text;
@@ -119,6 +120,9 @@ namespace WebAPI.Controllers
 
                 data.DisplayType = "Timeline";
 
+                ServicePointManager.Expect100Continue = true;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
                 var list = Csv.CsvListRepository.GetList(data.CsvDocument, true, "", "", "", false, null);
 
                 foreach (var col in list.ColumnNames)
@@ -181,7 +185,7 @@ namespace WebAPI.Controllers
         }
 
 
-        String urlFormat = "http://{0}/{1}.aspx?csv={2}&hasColumnNames={3}&groupBy={4}&width={5}&filterBy={6}&filterValue={7}&excatMatch={8}";
+        String urlFormat = "https://{0}/{1}.aspx?csv={2}&hasColumnNames={3}&groupBy={4}&width={5}&filterBy={6}&filterValue={7}&excatMatch={8}";
 
         [HttpPost]
         public HttpResponseMessage GetUrl(CsvData data)

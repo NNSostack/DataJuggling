@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Web;
 using System.Web.UI;
@@ -45,6 +46,9 @@ public partial class UserControls_TimelineJoggeling : System.Web.UI.UserControl
         if( !int.TryParse(Request.QueryString["numOfDaysToShow"], out numberOfDaysToShow) )
             numberOfDaysToShow = -1;
 
+        ServicePointManager.Expect100Continue = true;
+        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
         var list = Csv.CsvListRepository.GetList(
             csv,
             hasColumnNames, groupBy, filterBy, filterValue, excatFilterMatch, null);
@@ -63,7 +67,6 @@ public partial class UserControls_TimelineJoggeling : System.Web.UI.UserControl
         if (iTextColumn == -1)
             iTextColumn = 1;
 
-        String sep = ",";
         DateTime dt = DateTime.Now;
         DateTime dtEnd = dt.AddDays(1);
         sb.AppendFormat(deadlineFormat, "Idag", "Idag", dt.Year, dt.Month - 1, dt.Day, dtEnd.Year, dtEnd.Month - 1, dtEnd.Day);

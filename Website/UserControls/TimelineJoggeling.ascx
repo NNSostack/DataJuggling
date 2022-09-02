@@ -18,18 +18,18 @@
 
     var links = '[]';
 
+    google.load('visualization', '1.0', { 'packages': ['timeline', 'table'] });
     google.setOnLoadCallback(drawChart);
+
 
     <%# GetData() %>
 
     var showOnlyWithContent = <%# showOnlyWithContent.ToString().ToLower() %>;
     var startDate = new Date(<%# StartDate.Year %>,<%# StartDate.Month - 1 %>, <%# StartDate.Day %>);
     var endDate = new Date(<%# EndDate.Year %>,<%# EndDate.Month - 1 %>, <%# EndDate.Day %>);
-    
 
     var timeSpan = new Date(endDate.getTime() - startDate.getTime());
 
-    
     var zoomIndex = 0;
     var offset = 0;
 
@@ -66,12 +66,8 @@
                 clone[i][2] = rangeStart;
                 clone[i][3] = rangeEnd;
             }
-
-
-
-
         }
-        //console.log(startDate, endDate);
+
         var list = $.grep(clone, function (timeline, i) {
             return timeline[2] >= startDate && timeline[2] <= endDate || timeline[3] >= startDate && timeline[3] <= endDate && timeline[2] < timeline[3];
 
@@ -109,7 +105,7 @@
         dataTable.addColumn({ type: 'string', id: 'Deadline' });
         dataTable.addColumn({ type: 'date', id: 'Start' });
         dataTable.addColumn({ type: 'date', id: 'End' });
-        
+
         dataTable.addRows(
             getTimeLineObjects(sDate, eDate)
         );
